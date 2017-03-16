@@ -1,0 +1,933 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SalesPoint.Device</name>
+    </assembly>
+    <members>
+        <member name="T:SalesPoint.Device.Print.Printer">
+            <summary>
+            打印机功能
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.Initilize">
+            <summary>
+            初始化打印机
+            </summary>
+            <returns>-1:失败</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.Deinitilize">
+            <summary>
+            释放打印机
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.StartPrint">
+            <summary>
+            开始打印操作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.StopPrint">
+            <summary>
+            完成打印操作
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.PrintData(System.String)">
+            <summary>
+            打印内容
+            </summary>
+            <param name="data">打印的数据</param>
+        </member>
+        <member name="M:SalesPoint.Device.Print.Printer.PrintDataString(System.String)">
+            <summary>
+            打印:
+            已经将开始打印与结束打印封装进来，
+            打印时只需调用此方法即可
+            </summary>
+            <param name="data">需要打印的数据串</param>
+        </member>
+        <member name="T:SalesPoint.Device.PosModule">
+            <summary>
+            POS枪硬件操作模块(所有方法返回-1均为失败)
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpGetSerialNumber(System.Byte[],System.Int32@)">
+            <summary>
+            取枪的序列号
+            </summary>
+            <param name="sernum"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpScanPwrOn">
+            <summary>
+            打开打描枪电源
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpScanPwrOff">
+            <summary>
+            关闭扫描枪电源
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpScanReminder(System.Int32)">
+            <summary>
+            声音、震动（0:马达和声音，1:马达，2:声音）
+            </summary>
+            <param name="mode"></param>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpGPRSConnect(System.Int32@)">
+            <summary>
+            开始GPRS连接
+            </summary>
+            <param name="pSignal">信号强度值</param>
+            <returns>1成功，0失败</returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpGPRSDisConnect">
+            <summary>
+            GPRS关闭
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpAutoSleepEN">
+            <summary>
+            开启自动休眠
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpAutoSleepDI">
+            <summary>
+            关闭自动休眠
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpSetSleepTime(System.UInt32)">
+            <summary>
+            设置休眠时间
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpSleep">
+            <summary>
+            进入休眠
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpGetBatState(System.UInt32@)">
+            <summary>
+            获取电池电量
+            </summary>
+            <param name="pBatVol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpCloseLCD">
+            <summary>
+            关闭LCD显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpOpenLCD">
+            <summary>
+            开启LCD显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpCallControlPanel(System.Int32)">
+            <summary>
+            调用控制面板
+            0	pc连接属性
+            1	拨号属性
+            2	键盘属性
+            3	密码属性
+            4	所有者属性
+            5	电池属性
+            6	系统属性
+            7	显示属性
+            8	鼠标属性
+            9	笔针属性
+            10	声音属性
+            11	输入面板属性
+            12	删除程序
+            13	时间和日期
+            14	证书
+            </summary>
+            <param name="num"></param>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpQueryConnections">
+            <summary>
+            查询网络连接的                  1(00000001)
+            define NO_CONNECTION            00000000    0
+            define USB_CONNECTION   		00000001    1左移1位
+            define GPRS_CONNECTION			00000010    1左移2位
+            define DM9000_CONNECTION		00000100    1左移3位
+            define BLUETOOTH_CONNECTION	    00001000    1左移4位
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpIsWIFILoaded">
+            <summary>
+            查询wifi网络模块是否加载
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.SpWifiAutoLoader">
+            <summary>
+            加载或者关闭wifi网络模块
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.PosModule.ChangeDisplaySettingsEx(System.String,SalesPoint.Device.DEVMODE@,System.IntPtr,System.Int32,System.IntPtr)">
+            <summary>
+            改变屏幕显示方式（屏幕旋转）
+            </summary>
+            <param name="lpszDeviceName"></param>
+            <param name="lpDevMode"></param>
+            <param name="hwnd"></param>
+            <param name="dwflags"></param>
+            <param name="lParam"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SalesPoint.Device.SystemTime">
+            <summary>
+            时间结构体
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.DEVMODE">
+            <summary>
+            设备显示模式结构体
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.NetworkUtility">
+            <summary>
+            终端设备网络相关
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.DeviceMessager">
+            <summary>
+            显示消息类
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.DeviceMessager.ShowMessage(System.String)">
+            <summary>
+            显示消息代理(需要指定ShowMessageEvent事件对应到的方法)
+            </summary>
+            <param name="msg">需要显示的消息</param>
+        </member>
+        <member name="E:SalesPoint.Device.DeviceMessager.ShowMessageEvent">
+            <summary>
+            显示消息事件
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.DeviceMessager.Message">
+            <summary>
+            最后显示的消息内容
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.Instance">
+            <summary>
+            创建实例（默认监听）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.#ctor">
+            <summary>
+            默认以百度为标准来验证当前网络是否连通
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.StartListening">
+            <summary>
+            监听网络信号，默认三十秒监听一次（Edge以上网络支持）
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.StartListening(System.Int32)">
+            <summary>
+            监听网络信号（Edge以上网络支持）
+            </summary>
+            <param name="interval">监听间隔时间</param>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.ChangeListeningTime(System.Int32)">
+            <summary>
+            改变监听时间
+            </summary>
+            <param name="interval"></param>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.StopListening">
+            <summary>
+            停止监听网络信号（网络断开时会自动停止监听）
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.GetSemaphore(System.Int32)">
+            <summary>
+            根据网络信号值取信号值类型
+            </summary>
+            <param name="signal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.IsOnline">
+            <summary>
+            检测是否在线
+            </summary>
+            <returns>0:成功</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.IsOnline(System.String)">
+            <summary>
+            检测是否在线
+            </summary>
+            <returns>0:成功</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.CheckCurrentConneting">
+            <summary>
+            检测当前网络连接状态  
+            默认为连接百度网络
+            </summary>      
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.CheckCurrentConneting(System.String)">
+            <summary>
+            检测当前网络连接状态   
+            </summary>
+            <param name="iporname">IP或者域名;默认为连接百度网络</param>
+            <returns></returns>        
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.CurrentConnection">
+            <summary>
+            查看当前网络连接
+            define NO_CONNECTION            00000000    0
+            define USB_CONNECTION   		00000001    1左移1位（2）
+            define GPRS_CONNECTION			00000010    1左移2位（4）
+            define DM9000_CONNECTION		00000100    1左移3位（8）
+            define BLUETOOTH_CONNECTION	    00001000    1左移4位（16）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.ConnectNet">
+            <summary>
+            连接网络
+            不会判断当前网络是否已经连接成功,每次调用都会重新连接网络
+            </summary>
+            <returns>成功返回true</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.DisConnectNet">
+            <summary>
+            断开网络
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.NetworkUtility.ReConnectNet">
+            <summary>
+            重新连接网络
+            如果当前网络处于连接状态,直接返回true(已经连接)
+            否则重新连接网络
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.CanPing">
+            <summary>
+            是否ping（默认为真）
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.CanListenSignal">
+            <summary>
+            是否启用网络监听
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.ListeningIpName">
+            <summary>
+            IP或者域名：用来判断当前网络是否连通(www.baidu.com)
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Net.NetworkUtility.OnSemaphoreChanged">
+            <summary>
+            网络信号改变事件
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Net.NetworkUtility.OnConnecting">
+            <summary>
+            网络开始连接事件
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Net.NetworkUtility.OnConnected">
+            <summary>
+            网络连接完成事件
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Net.NetworkUtility.OnDisconnecting">
+            <summary>
+            网络开始断开事件
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Net.NetworkUtility.OnDisonnected">
+            <summary>
+            网络完成断开事件
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.CurrentSemaphore">
+            <summary>
+            当前信号量，不实时取
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.IsConnected">
+            <summary>
+            是否连接上，此属性不能判断是否在线。
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.NetworkUtility.Semaphore">
+            <summary>
+            实时取网络信号（Edge以上网络支持）
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.ShowMessageHandler">
+            <summary>
+            消息显示代理
+            </summary>
+            <param name="msg">消息</param>
+        </member>
+        <member name="T:SalesPoint.Device.Net.NetworkMessageHandler">
+            <summary>
+            网络连接断开事件
+            </summary>
+            <param name="message">消息</param>
+            <param name="semaphore">信号量</param>
+            <param name="async">是否异步操作</param>
+        </member>
+        <member name="T:SalesPoint.Device.Net.NetworkSemaphoreHandler">
+            <summary>
+            网络信号改变事件
+            </summary>
+            <param name="semap"></param>
+        </member>
+        <member name="T:SalesPoint.Device.Net.SemaphoreType">
+            <summary>
+            信号枚举
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.xHigh">
+            <summary>
+            非常好
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.High">
+            <summary>
+            中等
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.Normal">
+            <summary>
+            一般
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.Low">
+            <summary>
+            低
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.xLow">
+            <summary>
+            非常低
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.SemaphoreType.NoConnect">
+            <summary>
+            未连接
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Cashbox.Cashier">
+            <summary>
+            钱柜操作
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Cashbox.Cashier.Open">
+            <summary>
+            打开钱柜
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Battery.BatteryValueHandler">
+            <summary>
+            电池状态改变代理
+            </summary>
+            <param name="batteriesValue">电量值</param>
+            <param name="status">电源状态</param>
+        </member>
+        <member name="T:SalesPoint.Device.Battery.BatvalueEnum">
+            <summary>
+            电量状态
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.xHigh">
+            <summary>
+            很高
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.High">
+            <summary>
+            高
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.Normal">
+            <summary>
+            正常
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.Low">
+            <summary>
+            低
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.xLow">
+            <summary>
+            很低,报警
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.BatvalueEnum.None">
+            <summary>
+            内部使用
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Battery.PowerStatus">
+            <summary>
+            供电设备
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.PowerStatus.Battery">
+            <summary>
+            电池
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.PowerStatus.AC">
+            <summary>
+            电源
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Battery.PowerStatus.None">
+            <summary>
+            内部使用
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.WifiUtility">
+            <summary>
+            Wifi网络管理
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.WifiUtility.OpenWifiNet">
+            <summary>
+            开启WIFI网络
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.WifiUtility.CloseWifiNet">
+            <summary>
+            关闭WIFI网络
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.WifiUtility.ResetWifiNet">
+            <summary>
+            重启WIFI网络
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Battery.BatteryUtility">
+            <summary>
+            电池工具
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.CreateInstance">
+            <summary>
+            创建实例（默认为3秒）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.CreateInstance(System.Int32)">
+            <summary>
+            创建实例
+            </summary>
+            <param name="Inteval"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.#ctor(System.Int32)">
+            <summary>
+            电池
+            </summary>
+            <param name="Inteval">电池监听时间间隔</param>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.StartWatch">
+            <summary>
+            开始监听电量
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.ChangeTime(System.Int32)">
+            <summary>
+            改变监听间隔时间
+            </summary>
+            <param name="interval"></param>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility.StopWatch">
+            <summary>
+            停止监听
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Battery.BatteryUtility._OnBatteryChanged(System.Object)">
+            <summary>
+            电量改变事件
+            </summary>
+            <param name="Value"></param>
+        </member>
+        <member name="E:SalesPoint.Device.Battery.BatteryUtility.BatteryChanged">
+            <summary>
+            电源改变事件
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Battery.BatteryUtility.BatteryCompleted">
+            <summary>
+            电池充满
+            </summary>
+        </member>
+        <member name="E:SalesPoint.Device.Battery.BatteryUtility.LowBattery">
+            <summary>
+            低电量时提醒
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Battery.BatteryUtility.BatteryValue">
+            <summary>
+            当前电量值
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Battery.BatteryUtility.Powerstatus">
+            <summary>
+            当前电源状态
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Battery.BatteryUtility.BatteryPercentValue">
+            <summary>
+            电量100%比值
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Core.Sys">
+            <summary>
+            硬件操作类
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.Initilize">
+            <summary>
+            硬件初始化，整个程序生病周期一次
+            </summary>
+            <returns>-1:失败</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.Deinitilize">
+            <summary>
+            硬件释放，整个程序生病周期一次
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.FindWindow(System.String,System.String)">
+            <summary>
+            查找指定的窗体
+            </summary>
+            <param name="lpWindowName"></param>
+            <param name="lpClassName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.ShowWindow(System.Int32,System.Int32)">
+            <summary>
+            显示指定的窗体
+            </summary>
+            <param name="hwnd"></param>
+            <param name="nCmdShow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.TastBarVisible(System.Boolean)">
+            <summary>
+            任务栏的显示与隐藏
+            <param name="show">true:显示 false:隐藏</param>
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.SetSystemTime(System.DateTime)">
+            <summary>
+            设置系统时间
+            </summary>
+            <param name="dt"></param>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.SerialNumber">
+            <summary>
+            取设备的序列号
+            </summary>
+            <returns>失败：空串</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.DeviceID">
+            <summary>
+            获取设备唯一ID号
+            </summary>
+            <returns>成功：返回串，失败：空串</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.AutoSleep(System.Boolean)">
+            <summary>
+            自动休眠设置
+            </summary>
+            <param name="Enabled">是否启用自动休眠</param>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.EnterSleep">
+            <summary>
+            进入休眠
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.LCDOpen">
+            <summary>
+            打开液晶屏
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Core.Sys.LCDClose">
+            <summary>
+            关闭液晶屏
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SalesPoint.Device.Scan.ScanType">
+            <summary>
+            扫描功能（声音、马达）
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Scan.ScanType.None">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Scan.ScanType.MotorSound">
+            <summary>
+            马达和声音
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Scan.ScanType.Motor">
+            <summary>
+            马达
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Scan.ScanType.Sound">
+            <summary>
+            声音
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Scan.Scanner">
+            <summary>
+            扫描器
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.Initilize">
+            <summary>
+            打开扫描头(打开电源)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.Deinitilize">
+            <summary>
+            关闭扫描头(关闭电源)
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.StartScan">
+            <summary>
+            扫描条码(默认扫描是没有声音)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.StartScan(SalesPoint.Device.Scan.ScanType)">
+            <summary>
+            获取条码
+            </summary>
+            <param name="mode">0：马达和声音，1：马达，2：声音(其中马达只能用在无GPRS的机器上)</param>
+            <returns>返回条码字符串</returns>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.ScanSuccessSound">
+            <summary>
+            播放扫描正确的声音
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Scan.Scanner.ScanErrorsSound">
+            <summary>
+            播放扫描失败的声音
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.SoundPlay">
+            <summary>
+            播放声音
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.SoundPlay.Play(SalesPoint.Device.SoundType)">
+            <summary>
+            Play the sound
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.SoundPlay.Play(System.String)">
+            <summary>
+            播放文件
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="T:SalesPoint.Device.SoundType">
+            <summary>
+            扫描声音类型
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.SoundType.ScanEmpty">
+            <summary>
+            扫描没扫到条码
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.SoundType.ScanError">
+            <summary>
+            扫描出错后
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.SoundType.ScanSound">
+            <summary>
+            扫描
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.Ping">
+            <summary>
+            Ping功能实现（支持域名及IP地址）
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.Ping.Send(System.String)">
+            <summary>
+            发送消息至服务器
+            </summary>
+            <param name="uri">IP或域名</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalesPoint.Device.Net.Ping.Send(System.String,System.Int32)">
+            <summary>
+            发送消息至服务器
+            </summary>
+            <param name="uri">IP或域名</param>
+            <param name="timeout">设置超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="T:SalesPoint.Device.Net.IcmpEchoReply">
+            <summary>
+            ICMP协议头
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.IPStatus">
+            <summary>
+            Reports the status of sending an Internet Control Message Protocol (ICMP) echo message to a computer.
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.IPOptions">
+            <summary>
+            The ip_option_information structure describes the options to be
+            included in the header of an IP packet. The TTL, TOS, and Flags
+            values are carried in specific fields in the header. The OptionsData
+            bytes are carried in the options area following the standard IP header.
+            With the exception of source route options, this data must be in the
+            format to be transmitted on the wire as specified in RFC 791. A source
+            route option should contain the full route - first hop thru final
+            destination - in the route data. The first hop will be pulled out of the
+            data and the option will be reformatted accordingly. Otherwise, the route
+            option should be formatted as specified in RFC 791.
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.IPOptions.ttl">
+            <summary>
+            Time To Live.
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.IPOptions.tos">
+            <summary>
+            Type Of Service.
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.IPOptions.flags">
+            <summary>
+            IP header flags.
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Net.IPOptions.optionsSize">
+            <summary>
+            Size in bytes of options data.
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Net.PingOptions">
+            <summary>
+            Used to control how Ping data packets are transmitted.
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.PingOptions.#ctor">
+            <summary>
+            Initializes a new instance of the PingOptions class.
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Net.PingOptions.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the PingOptions class and sets the Time to Live and fragmentation values.
+            </summary>
+            <param name="ttl">Specifies the number of times the Ping data packets can be forwarded.</param>
+            <param name="dontFragment">True to prevent data sent to the remote host from being fragmented; otherwise, false.</param>
+        </member>
+        <member name="P:SalesPoint.Device.Net.PingOptions.Ttl">
+            <summary>
+            Gets or sets the number of routing nodes that can forward the Ping data before it is discarded.
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Net.PingOptions.DontFragment">
+            <summary>
+            Gets or sets a Boolean value that controls fragmentation of the data sent to the remote host.
+            </summary>
+        </member>
+        <member name="T:SalesPoint.Device.Core.SystemRotate">
+            <summary>
+            系统旋转
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Core.SystemRotate.T20SCREENWIDTH">
+            <summary>
+            2.0/2.5T屏幕宽
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Core.SystemRotate.T28SCREENWIDTH">
+            <summary>
+            2.8T屏幕宽
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Core.SystemRotate.T20SCREENHEIGHT">
+            <summary>
+            2.0/2.5T屏幕高
+            </summary>
+        </member>
+        <member name="F:SalesPoint.Device.Core.SystemRotate.T28SCREENHEIGHT">
+            <summary>
+             2.8T屏幕高
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Core.SystemRotate.RotateScreen">
+            <summary>
+            将当前系统的屏幕进行横竖旋转
+            </summary>
+        </member>
+        <member name="M:SalesPoint.Device.Core.SystemRotate.SetScreenDisplayVitycal">
+            <summary>
+            设置屏幕为竖屏
+            此方法在部分窗体不允许旋转时使用
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Core.SystemRotate.T20ScreenSize">
+            <summary>
+            2/2.5T屏幕大小
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Core.SystemRotate.T20ScreenSizeR90">
+            <summary>
+             2/2.5T屏幕旋转90度大小
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Core.SystemRotate.T28ScreenSize">
+            <summary>
+             2.8T屏幕大小
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Core.SystemRotate.T28ScreenSizeR90">
+            <summary>
+             2.8T屏幕旋转90度大小
+            </summary>
+        </member>
+        <member name="P:SalesPoint.Device.Core.SystemRotate.ISDisplayVitcalScreen">
+            <summary>
+            屏幕是否正常(竖屏)显示（默认竖屏）
+            </summary>
+        </member>
+    </members>
+</doc>

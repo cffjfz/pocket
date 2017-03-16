@@ -1,0 +1,15 @@
+F:\手持机\demo\Main\bin\Debug\Main.exe
+F:\手持机\demo\Main\bin\Debug\Main.pdb
+F:\手持机\demo\Main\obj\Debug\ResolveAssemblyReference.cache
+F:\手持机\demo\Main\obj\Debug\Main.Form1.resources
+F:\手持机\demo\Main\obj\Debug\Main.Properties.Resources.resources
+F:\手持机\demo\Main\obj\Debug\Main.csproj.GenerateResource.Cache
+F:\手持机\demo\Main\obj\Debug\Main.exe
+F:\手持机\demo\Main\obj\Debug\Main.pdb
+F:\手持机\demo\Main\bin\Debug\System.Data.SqlClient.dll
+F:\手持机\demo\Main\obj\Debug\Main.FrmFunction.resources
+F:\手持机\demo\Main\obj\Debug\Main.FrmAdd.resources
+F:\手持机\demo\Main\bin\Debug\NRfidApi.dll
+F:\手持机\demo\Main\bin\Debug\NRfidApi.pdb
+F:\手持机\demo\Main\bin\Debug\NBarcodeApi.dll
+F:\手持机\demo\Main\bin\Debug\NBarcodeApi.pdb
