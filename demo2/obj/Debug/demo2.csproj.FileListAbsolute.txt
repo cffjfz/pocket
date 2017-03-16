@@ -10,7 +10,6 @@ D:\demo\demo2\bin\Debug\NRfidApi.dll
 D:\demo\demo2\bin\Debug\NRfidApi.pdb
 F:\手持机\demo\demo2\bin\Debug\demo2.exe
 F:\手持机\demo\demo2\bin\Debug\demo2.pdb
-F:\手持机\demo\demo2\bin\Debug\NRfidApi.pdb
 F:\手持机\demo\demo2\obj\Debug\ResolveAssemblyReference.cache
 F:\手持机\demo\demo2\obj\Debug\demo2.Form1.resources
 F:\手持机\demo\demo2\obj\Debug\demo2.Properties.Resources.resources

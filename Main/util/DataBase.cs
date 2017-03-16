@@ -70,7 +70,7 @@ namespace Main
         {
             if (con == null)
             {
-                con = new SqlConnection("server=192.168.3.168;uid=sa;pwd=xlkj;database=xingliankeji");
+                con = new SqlConnection("server=192.168.3.142;uid=sa;pwd=xlkj;database=xingliankeji");
 
             }
             if (con.State == ConnectionState.Closed)

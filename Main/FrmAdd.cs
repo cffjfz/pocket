@@ -34,12 +34,13 @@ namespace Main
         DataBase data = new DataBase();
         private void FrmAdd_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         BarcodeApi barcode;
-       static int itemsCount = 0;//用来计算录入多少件
+        static int itemsCount = 0;//用来计算录入多少件
         int sid = 0;//用来接收sid
+        bool flag = true;
         public void BarcodeAppCallBack()
         {
             this.btnBarcode.Text = "Scan";
@@ -56,7 +57,13 @@ namespace Main
             //判断输入的rfid码是否有效
             if (dt.Rows.Count <= 0)
             {
+                flag = false;
                 MessageBox.Show("输入的二维码/条形码无效");
+                this.txtBarcode.Text = "";
+            }
+            else
+            {
+                flag = true;
             }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -79,8 +86,8 @@ namespace Main
                     li.SubItems.Add(gi.Remark);
                     li.SubItems.Add(gi.RFID);
                     lvInfo.Items.Insert(0, li);//新加的一行排在最前面
-                    this.lblCount.Text=(++itemsCount).ToString();
-                    
+                    this.lblCount.Text = (++itemsCount).ToString();
+
                 }
             }
             Value = null;
@@ -113,14 +120,16 @@ namespace Main
             // Data GetResult function and read the values  告过程的分离。
             rfid.GetResult(Msg, CallbackData.CallbackType, CallbackData.wParam, CallbackData.lParam);
             Msg = Msg.Substring(0, Msg.IndexOf("\0"));
-            if (this.txtRfid.Text != null && !this.txtRfid.Text.Equals("")&&Msg.Length>5)
+            if (this.txtRfid.Text != null && !this.txtRfid.Text.Equals("") && Msg.Length > 5)
             {
                 if (Msg.Substring(0, 4).Equals("3000"))//3000e4110000
                 {
                     Msg = Msg.Substring(4);
+                    
                 }
-            }
+            }  
             InventoryProc(Msg, CallbackData.CallbackType);
+            this.btnRfid.Text = "Start";
         }
         public void InventoryProc(string Msg, RFID_CALLBACK_TYPE Type)
         {
@@ -130,12 +139,12 @@ namespace Main
             {
                 if (Tags.Contains(Msg))//如果是相同数据
                 {
-                 
+
                 }
                 else
                 {
-                ////
-                //MessageBox.Show(Msg);
+                    ////
+                    //MessageBox.Show(Msg);
                     this.txtRfid.Text = Msg;
                     string sql = string.Format("update  GoodsInfo set RFID='{0}' where barcode='{1}' ", Msg, this.txtBarcode.Text);
                     int num = data.RunSql(sql);
@@ -144,7 +153,7 @@ namespace Main
                         MessageBox.Show("匹配成功，请重新扫描二维码进行导入");
                     }
                     Tags.Add(Msg);
-
+                    this.btnRfid.Text = "Start";
                 }
             }
             // Run from the command module to receive the results of running Callback delegate.
@@ -172,7 +181,7 @@ namespace Main
             else
             {
                 this.btnRfid.Enabled = false;
-                
+
             }
         }
 
@@ -188,15 +197,15 @@ namespace Main
             if (this.btnBarcode.Text == "Scan")
             {
                 res = barcode.Start();
-
                 if (res == BARCODE_RESULT.BARCODE_RESULT_SUCCESS)
                 {
                     this.btnBarcode.Text = "Stop";
                     barcode.SetCallback(new BarcodeApi.BARCODECALLBACK(BarcodeAppCallBack));
+
                 }
 
-                else
-                    MessageBox.Show(res.ToString());
+                //else
+                //    MessageBox.Show(res.ToString());
             }
             else
             {
@@ -231,14 +240,14 @@ namespace Main
         //提交
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         #region 根据rfid获取sid
         public int GetSidByRfid(string ss)
         {
             List<int> nums = new List<int>();
-            string sql =string.Format( " select sid from goodsInfo where rfid='{0}'",ss);
+            string sql = string.Format(" select sid from goodsInfo where rfid='{0}'", ss);
             DataTable dt = data.Query(sql);
             foreach (DataRow dr in dt.Rows)
             {
@@ -265,7 +274,7 @@ namespace Main
                     MessageBox.Show("名称：" + " " + ss + "\r\n" + "数量：" + " " + s1 + "\r\n" + "型号：" + " " + s2 + "\r\n" + "备注：" + " " + s3 + "\r\n");
                 }
             }
-           
+
         }
 
         private void FrmAdd_KeyDown(object sender, KeyEventArgs e)
@@ -273,7 +282,7 @@ namespace Main
             if ((e.KeyCode == System.Windows.Forms.Keys.Up))
             {
                 // Up
-            } 
+            }
             if ((e.KeyCode == System.Windows.Forms.Keys.Down))
             {
                 // Down
@@ -298,21 +307,53 @@ namespace Main
             }
             if ((e.KeyCode == System.Windows.Forms.Keys.F19))
             {
-                //if (this.txtBarcode.Text == null || this.txtBarcode.Text != null && this.txtRfid.Text != null)
-                //{
-                //    btnBarcode_Click_1(null, null);
-                //}
-                //else if (this.txtBarcode.Text != null && this.txtRfid.Text == null)
-                //{
-                //    btnRfid_Click_1(null, null);
-                //}
-                btnBarcode_Click_1(null, null);
+                if (this.txtBarcode.Text == ""||!flag)
+                {
+                    Scan();//第一次进来
+                }
+                else if (this.txtBarcode.Text != "" && this.txtRfid.Text != "")
+                {
+                    //先把输入框的值清空
+                    this.txtBarcode.Text = "";
+                    this.txtRfid.Text = "";
+
+                    Scan();//第二次进来
+                }
+                else if (this.txtBarcode.Text != "" && this.txtRfid.Text == ""&&flag)
+                {
+                    btnRfid_Click_1(null, null);
+                    
+                }
+                //btnBarcode_Click_1(null, null);
             }
         }
 
-        protected virtual void Scan() 
+        private void Scan()
         {
+            BARCODE_RESULT res;
 
+            if (this.btnBarcode.Text == "Scan")
+            {
+                res = barcode.Start();
+                if (res == BARCODE_RESULT.BARCODE_RESULT_SUCCESS)
+                {
+                    this.btnBarcode.Text = "Stop";
+                    barcode.SetCallback(new BarcodeApi.BARCODECALLBACK(BarcodeAppCallBack));
+
+                }
+
+                //else
+                //    MessageBox.Show(res.ToString());
+            }
+            else
+            {
+                // Barcode scanning is stoppend.
+                res = barcode.Stop();             //对象为空报错
+                if (res == BARCODE_RESULT.BARCODE_RESULT_SUCCESS)
+                    this.btnBarcode.Text = "Scan";
+                else
+                    MessageBox.Show(res.ToString());
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -336,12 +377,17 @@ namespace Main
                 {
                     count++;
                 }
+                //往操作记录表添加数据
+                string RecordSql = string.Format("insert into OperationRecords values ('{0}','{1}','{2}','{3}','{4}')", DateTime.Now.ToString(), sid, 1, 1, Form1.userName);
+                data.RunSql(RecordSql);
             }
             MessageBox.Show("共提交" + count + "条数据");
             lvInfo.Items.Clear();
             itemsCount = 0;
             this.lblCount.Text = itemsCount.ToString();
             //MessageBox.Show(lvInfo.Items[0].SubItems[4].Text.ToString());
+
+           
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

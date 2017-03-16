@@ -11,9 +11,7 @@ D:\demo\demo\obj\Debug\demo.pdb
 D:\demo\demo\bin\Debug\System.Data.SqlClient.dll
 F:\手持机\demo\demo\bin\Debug\demo.exe
 F:\手持机\demo\demo\bin\Debug\demo.pdb
-F:\手持机\demo\demo\bin\Debug\NBarcodeApi.dll
 F:\手持机\demo\demo\bin\Debug\System.Data.SqlClient.dll
-F:\手持机\demo\demo\bin\Debug\NBarcodeApi.pdb
 F:\手持机\demo\demo\obj\Debug\ResolveAssemblyReference.cache
 F:\手持机\demo\demo\obj\Debug\demo.Form1.resources
 F:\手持机\demo\demo\obj\Debug\demo.Properties.Resources.resources
