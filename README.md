@@ -1,0 +1,2 @@
+# pocket
+input barcode & ir
